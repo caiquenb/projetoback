@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 
+const API = import.meta.env.VITE_API_URL;
+axios.get(`${API}/api/produto/${formData.codProducao}`);
+axios.post(`${API}/api/formulario`, dadosComUsuario);
 
 
 
@@ -235,6 +238,15 @@ app.put('/api/producao/:id', async (req, res) => {
   }
 });
 
+app.get("/ping", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT 1 + 1 AS resultado");
+    res.json({ sucesso: true, resultado: rows[0].resultado });
+  } catch (err) {
+    console.error("Erro na conexão com o banco:", err.message);
+    res.status(500).json({ sucesso: false, erro: err.message });
+  }
+});
 
 
 
