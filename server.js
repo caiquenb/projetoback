@@ -11,7 +11,8 @@ const dbHost = process.env.DB_HOST;
 
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +24,7 @@ app.use(express.json());
 //   password: '1234',
 //   database: 'himaflexn1',
 // });
-require('dotenv').config();
+
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -31,10 +32,9 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT || 3306,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ...(process.env.DB_USE_SSL === 'true' ? { ssl: { rejectUnauthorized: false } } : {})
 });
+
 // ROTAS -----------------------------
 
 // GET /usuarios - lista todos os usuários
