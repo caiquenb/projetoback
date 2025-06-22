@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 
-const API = import.meta.env.VITE_API_URL;
-axios.get(`${API}/api/produto/${formData.codProducao}`);
-axios.post(`${API}/api/formulario`, dadosComUsuario);
+require('dotenv').config();
+
+const dbHost = process.env.DB_HOST;
+// e outras variáveis de conexão
+
 
 
 
@@ -30,7 +32,7 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT || 3306,
   ssl: {
-    rejectUnauthorized: true,
+    rejectUnauthorized: false,
   },
 });
 // ROTAS -----------------------------
