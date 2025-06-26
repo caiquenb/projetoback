@@ -253,6 +253,9 @@ app.get("/ping", async (req, res) => {
 
 
 // INICIAR SERVIDOR -------------------
-app.listen(PORT, () => {
-  console.log(`Servidor backend rodando na porta ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
+console.log(`Running on port ${PORT} - PID ${process.pid}`);
+
+
